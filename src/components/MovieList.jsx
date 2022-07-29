@@ -46,7 +46,7 @@ const MovieListStyled = styled.div`
         font-weight: 400;
         font-size: 24px;
         line-height: 40px;
-        height: 67px;
+        height: 110px;
         display: flex;
         align-items: center;
         text-align: center;
@@ -70,10 +70,16 @@ const MovieListStyled = styled.div`
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            margin-bottom: 15px;
+    
             img {
                 width: 129px;
                 height: 193px;
                 object-fit: cover;
+                border: 8px solid #FFFFFF;
+                border-radius: 3px;
+                box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+     
             }
         }
     }
