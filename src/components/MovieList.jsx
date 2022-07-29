@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Header from './Header';
@@ -23,8 +24,10 @@ export default function MovieList () {
            </h2>
               <ul>
                 {movies.map(movie => (
-                    <li key={movie.id}>
+                    <li key={movie.id}>                   
+                        <Link to={`/receita/${movie.id}`}>
                             <img src={movie.posterURL} alt={movie.title} />
+                        </Link>                          
                     </li>
                 ))}
             </ul>
