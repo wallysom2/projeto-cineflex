@@ -1,10 +1,19 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App () {
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  );
+import MovieList from "./MovieList";
+
+import "./../assets/css/reset.css";
+
+
+function App() {
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<MovieList />} />
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;
+
