@@ -29,10 +29,10 @@ console.log(sessoes);
             <h2>
                 Selecione o horário
             </h2>
-            <div>
+            <Time>
             {sessoes.map(time =>
             <>
-                    <p>{time.weekday} - {time.date}</p>
+                    <p key={time.id}>{time.weekday} - {time.date}</p>
                     <div>
                         {time.showtimes.map(session=>
                         <Link to={`/session/${session.id}`}>
@@ -42,7 +42,7 @@ console.log(sessoes);
                     </div>
             </>
             )}
-            </div>
+            </Time>
         </SessionsStyled>
     );
 }
@@ -66,5 +66,46 @@ const SessionsStyled = styled.div`
         color: #293845;
     }
 `
+const Time = styled.div`
+   p {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.02em;
+        color: #293845;
+   }
+    div {
+        display: flex;
+        flex-direction: row;
+        margin: 22px 0px;
+        
+    }
+   span {
+    width: 83px;
+    height: 43px;
+    left: 114px;
+    top: 227px;
+    background: #E8833A;
+    border-radius: 3px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+    margin-right: 10px;
+    
+   }
+
+`
+ 
 
         
