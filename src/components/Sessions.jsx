@@ -4,6 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 
 import Header from "./Header";
+import Footer from "./Footer";
 
 export default function Sessions() {
     const params = useParams();
@@ -21,28 +22,32 @@ export default function Sessions() {
             setInfos({title:res.data.title, poster:res.data.posterURL})
           });
         }, []);
-console.log(sessoes);
 
     return (
         <SessionsStyled>
             <Header />
+
             <h2>
                 Selecione o horário
             </h2>
+          
             <Time>
             {sessoes.map(time =>
             <>
                     <p key={time.id}>{time.weekday} - {time.date}</p>
                     <div>
                         {time.showtimes.map(session=>
-                        <Link to={`/session/${session.id}`}>
+                        <Link to={`/session/${session.id}`} key={session.id}>
                             <span>{session.name}</span>
                         </Link>
                             )}
+                            
                     </div>
             </>
             )}
             </Time>
+
+            <Footer info={infos}/>
         </SessionsStyled>
     );
 }
@@ -77,11 +82,13 @@ const Time = styled.div`
         align-items: center;
         letter-spacing: 0.02em;
         color: #293845;
+        
    }
     div {
         display: flex;
         flex-direction: row;
         margin: 22px 0px;
+    
         
     }
    span {
@@ -102,8 +109,11 @@ const Time = styled.div`
     letter-spacing: 0.02em;
     color: #FFFFFF;
     margin-right: 10px;
-    
+    text-decoration: none;
    }
+   a {
+    text-decoration: none;
+    }
 
 `
  
