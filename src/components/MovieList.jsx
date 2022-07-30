@@ -25,7 +25,7 @@ export default function MovieList () {
               <ul>
                 {movies.map(movie => (
                     <li key={movie.id}>                   
-                        <Link to={`/receita/${movie.id}`}>
+                        <Link to={`/sessoes/${movie.id}`}> 
                             <img src={movie.posterURL} alt={movie.title} />
                         </Link>                          
                     </li>
