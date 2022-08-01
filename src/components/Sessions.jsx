@@ -1,119 +1,121 @@
-import { useState, useEffect } from "react";
+import axios from 'axios';
+import styled from 'styled-components';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
-import styled from "styled-components";
+import Rodape from './Rodape';
 
-import Header from "./Header";
-import Footer from "./Footer";
-
-export default function Sessions() {
-    const params = useParams();
-    const [sessoes, setSessoes] = useState([]);
+export default function Sessions(){
+    const { idMovie } = useParams();
+    const [schedules, setSchedules] = useState([]);
     const [infos, setInfos] = useState([]);
 
     useEffect(() => {
-        const requisicao = axios.get(
-            `https://mock-api.driven.com.br/api/v7/cineflex/movies/${params.idFilme}/showtimes/`
-        );
-
-        requisicao.then((res) => {
-            setSessoes(res.data.days);
-            setInfos({ title: res.data.title, poster: res.data.posterURL })
-        });
-        requisicao.catch()
-    }, [params.idFilme]);
-
-    return (
-        <SessionsStyled>
-            <Header />
-
-            <h2>
-                Selecione o horário
-            </h2>
-
-            <Time>
-                {sessoes.map(time =>
-                    <>
-                        <p key={time.id}>{time.weekday} - {time.date}</p>
-                        <div>
-                            {time.showtimes.map(session =>
-                                <Link to={`/session/${session.id}`} key={session.id}>
-                                    <span key={session.id}>{session.name}</span>
-                                </Link>
+    const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${idMovie}/showtimes`)
+    promise.then((answer) => {
+        setSchedules(answer.data.days)
+        setInfos({title:answer.data.title, poster:answer.data.posterURL})
+    })
+    promise.catch()
+}, [idMovie]);
+    return infos!==''?(
+        <>
+            <TopSession>
+                <p>Selecione o horário</p>
+            </TopSession>
+            <Data>
+            {schedules.map(schedule =>
+            <>
+                    <p>{schedule.weekday} - {schedule.date}</p>
+                    <div>
+                        {schedule.showtimes.map(session=>
+                        <Link to={`/session/${session.id}`}>
+                            <span>{session.name}</span>
+                        </Link>
                             )}
-                        </div>
-                    </>
-                )}
-            </Time>
+                    </div>
+            </>
+            )}
+            </Data>
+            <Rodape info={infos}/>
+        </>
 
-            <Footer info={infos} />
-        </SessionsStyled>
-    );
+    )
+    :
+    (
+        <></>
+    )
 }
 
-const SessionsStyled = styled.div`
+const Data = styled.div`
+margin-bottom: 117px;
+a{
+    text-decoration: none;
+}
+p{
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    background-color: #E5E5E5;
-    h2 {
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 40px;
-        height: 110px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #293845;
-    }
-`
-const Time = styled.div`
-   p {
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 23px;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.02em;
-        color: #293845;
-   }
-
-    div {
-        display: flex;
-        flex-direction: row;
-        margin: 22px 0px;
-    }
-
-   span {
-    width: 83px;
+    font-family: 'Roboto';
+    font-style: normal;
+    margin-bottom: 22px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    margin-left: 24px;
+    letter-spacing: 0.02em;
+    color: #293845;
+}
+div{
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+}
+span{
+    margin-right: 8px;
+    margin-bottom: 24px;
+    width: 82px;
     height: 43px;
-    left: 114px;
-    top: 227px;
-    background: #E8833A;
-    border-radius: 3px;
+
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 21px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    text-align: center;
     letter-spacing: 0.02em;
+
+    background: #E8833A;
+    border-radius: 3px;
+    cursor: pointer;
+
     color: #FFFFFF;
-    margin-right: 10px;
-    text-decoration: none;
-   }
-
-   a {
-    text-decoration: none;
+}
+@media (min-width: 600px) {
+        max-width: 600px;
+        margin: 0 auto;
     }
-
 `
+    const TopSession = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 110px;
+    margin-top: 67px;
+p{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.04em;
 
-
+    color: #293845;
+}
+`

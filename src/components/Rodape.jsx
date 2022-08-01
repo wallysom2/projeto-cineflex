@@ -1,24 +1,24 @@
 import styled from 'styled-components';
 import React from 'react';
 
-export default function Footer(infos) {
-    const { info } = infos;
-    const { title, poster, schedule, dayWeek } = info
+
+export default function Rodape(infos){
+    const{info} = infos;
+    const {title, poster, schedule, dayWeek} = info
     return (
-        <FooterStyled>
-            <div>
-                <img src={poster} alt={title} />
-            </div>
-            {schedule ?
-                <p>{title}<br />{dayWeek} - {schedule}</p>
-                :
-                <p>{title}</p>
-            }
-        </FooterStyled>
+        <Footer>
+        <div>
+            <img src={poster} alt={title} />
+        </div>
+        {schedule?
+        <p>{title}<br/>{dayWeek} - {schedule}</p>
+        :
+        <p>{title}</p>
+        }
+    </Footer>
     )
 }
-
-const FooterStyled = styled.div`
+const Footer = styled.div`
     display: flex;
     align-items: center;
     position: fixed;
@@ -26,6 +26,7 @@ const FooterStyled = styled.div`
     height: 110px;
     left: 0;
     bottom: 0;
+
     background: #DFE6ED;
     border: 1px solid #9EADBA;
 div{
@@ -51,6 +52,10 @@ p{
     line-height: 30px;
     display: flex;
     align-items: center;
+
     color: #293845;
+}
+small{
+
 }
 `

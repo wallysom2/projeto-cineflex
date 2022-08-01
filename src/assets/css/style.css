@@ -1,0 +1,12 @@
+/* estilos gerais da aplicação */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(#E5E5E5);
+}
+
+
+

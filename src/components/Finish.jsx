@@ -4,9 +4,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import {cpfMask} from "./Mask"
-import Footer from './Footer';
+import Rodape from './Rodape';
 
-export default function Seats(){
+export default function Finish(){
     const { idSession } = useParams();
     const [seats, setSeats] = useState([]);
     const [name, setName] = useState('');
@@ -61,7 +61,7 @@ export default function Seats(){
             <TopFinish>
                 <p>Selecione o(s) assento(s)</p>
             </TopFinish>
-            <SeatsStyled >
+            <Seats >
                 {seats.map(assento =>
                 <>
                     {!assento.isAvailable?
@@ -74,7 +74,7 @@ export default function Seats(){
                     }
                 </>
                 )}
-            </SeatsStyled>
+            </Seats>
             <Seats>
                 <div>
                     <p className='selected'> </p>
@@ -109,7 +109,7 @@ export default function Seats(){
                     <button type="submit">Reservar assento(s)</button>
                 </form>
             </Entries>
-            <Footer info={infos}></Footer>
+            <Rodape info={infos}></Rodape>
         </>
     )
 }
@@ -173,7 +173,7 @@ button{
 }
 `
 
-const SeatsStyled = styled.div`
+const Seats = styled.div`
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
