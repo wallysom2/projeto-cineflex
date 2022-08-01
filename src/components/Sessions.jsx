@@ -11,17 +11,17 @@ export default function Sessions() {
     const [sessoes, setSessoes] = useState([]);
     const [infos, setInfos] = useState([]);
 
-
     useEffect(() => {
         const requisicao = axios.get(
-          `https://mock-api.driven.com.br/api/v7/cineflex/movies/${params.idFilme}/showtimes/`
+            `https://mock-api.driven.com.br/api/v7/cineflex/movies/${params.idFilme}/showtimes/`
         );
-  
+
         requisicao.then((res) => {
             setSessoes(res.data.days);
-            setInfos({title:res.data.title, poster:res.data.posterURL})
-          });
-        }, []);
+            setInfos({ title: res.data.title, poster: res.data.posterURL })
+        });
+        requisicao.catch()
+    }, [params.idFilme]);
 
     return (
         <SessionsStyled>
@@ -30,24 +30,23 @@ export default function Sessions() {
             <h2>
                 Selecione o horário
             </h2>
-          
+
             <Time>
-            {sessoes.map(time =>
-            <>
-                    <p key={time.id}>{time.weekday} - {time.date}</p>
-                    <div>
-                        {time.showtimes.map(session=>
-                        <Link to={`/session/${session.id}`} key={session.id}>
-                            <span>{session.name}</span>
-                        </Link>
+                {sessoes.map(time =>
+                    <>
+                        <p key={time.id}>{time.weekday} - {time.date}</p>
+                        <div>
+                            {time.showtimes.map(session =>
+                                <Link to={`/session/${session.id}`} key={session.id}>
+                                    <span key={session.id}>{session.name}</span>
+                                </Link>
                             )}
-                            
-                    </div>
-            </>
-            )}
+                        </div>
+                    </>
+                )}
             </Time>
 
-            <Footer info={infos}/>
+            <Footer info={infos} />
         </SessionsStyled>
     );
 }
@@ -82,15 +81,14 @@ const Time = styled.div`
         align-items: center;
         letter-spacing: 0.02em;
         color: #293845;
-        
    }
+
     div {
         display: flex;
         flex-direction: row;
         margin: 22px 0px;
-    
-        
     }
+
    span {
     width: 83px;
     height: 43px;
@@ -111,11 +109,11 @@ const Time = styled.div`
     margin-right: 10px;
     text-decoration: none;
    }
+
    a {
     text-decoration: none;
     }
 
 `
- 
 
-        
+

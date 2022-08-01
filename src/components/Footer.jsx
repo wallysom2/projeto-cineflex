@@ -1,23 +1,23 @@
 import styled from 'styled-components';
 import React from 'react';
 
-
-export default function Footer (infos){
-    const{info} = infos;
-    const {title, poster, schedule, dayWeek} = info
+export default function Footer(infos) {
+    const { info } = infos;
+    const { title, poster, schedule, dayWeek } = info
     return (
         <FooterStyled>
-        <div>
-            <img src={poster} alt={title} />
-        </div>
-        {schedule?
-        <p>{title}<br/>{dayWeek} - {schedule}</p>
-        :
-        <p>{title}</p>
-        }
-    </FooterStyled>
+            <div>
+                <img src={poster} alt={title} />
+            </div>
+            {schedule ?
+                <p>{title}<br />{dayWeek} - {schedule}</p>
+                :
+                <p>{title}</p>
+            }
+        </FooterStyled>
     )
 }
+
 const FooterStyled = styled.div`
     display: flex;
     align-items: center;
@@ -52,7 +52,5 @@ p{
     display: flex;
     align-items: center;
     color: #293845;
-}
-small{
 }
 `

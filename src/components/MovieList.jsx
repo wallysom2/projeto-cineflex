@@ -6,32 +6,31 @@ import axios from 'axios';
 
 import Header from './Header';
 
-export default function MovieList () {
+export default function MovieList() {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-		const request = axios.get("https://mock-api.driven.com.br/api/v7/cineflex/movies");
+        const request = axios.get("https://mock-api.driven.com.br/api/v7/cineflex/movies");
         request.then(response => {
             setMovies(response.data);
         });
-	}, []);
+    }, []);
 
     return (
         <MovieListStyled>
-             <Header /> 
-           <h2>
+            <Header />
+            <h2>
                 Selecione o filme
-           </h2>
-              <ul>
+            </h2>
+            <ul>
                 {movies.map(movie => (
-                    <li key={movie.id}>                   
-                        <Link to={`/sessoes/${movie.id}`}> 
+                    <li key={movie.id}>
+                        <Link to={`/sessoes/${movie.id}`}>
                             <img src={movie.posterURL} alt={movie.title} />
-                        </Link>                          
+                        </Link>
                     </li>
                 ))}
             </ul>
-
         </MovieListStyled>
     );
 }
@@ -75,14 +74,13 @@ const MovieListStyled = styled.div`
             flex-direction: column;
             margin-bottom: 15px;
     
-            img {
-                width: 129px;
-                height: 193px;
-                object-fit: cover;
-                border: 8px solid #FFFFFF;
-                border-radius: 3px;
-                box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
-     
+        img {
+            width: 129px;
+            height: 193px;
+            object-fit: cover;
+            border: 8px solid #FFFFFF;
+            border-radius: 3px;
+            box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
             }
         }
     }
